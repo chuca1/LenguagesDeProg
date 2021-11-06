@@ -1,3 +1,10 @@
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,8 +22,9 @@ public class GUIFrame extends javax.swing.JFrame {
      */
     public GUIFrame() {
         initComponents();
+        //setTable();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,11 +66,50 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Tiempo de Espera (ms)");
 
+        jTextField1.setText("0");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
+
+        jTextField2.setText("0");
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
+            }
+        });
+
+        jTextField3.setText("0");
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField3KeyPressed(evt);
+            }
+        });
+
         jLabel6.setText("Rango de Valores (n, m)");
+
+        jTextField4.setText("0");
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField4KeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Productores");
 
         jLabel2.setText("Consumidores");
+
+        jSpinner1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jSpinner1KeyPressed(evt);
+            }
+        });
 
         jLabel3.setText("Tamaño del Buffer");
 
@@ -140,26 +187,26 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Tarea"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Tarea", "Resultado"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -178,8 +225,8 @@ public class GUIFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -196,13 +243,13 @@ public class GUIFrame extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Procesos", jPanel3);
@@ -239,26 +286,147 @@ public class GUIFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean ready = false;
+    ArrayList<Consumer> consumerList;
+    ArrayList<Producer> producerList;
+    /*
+    DefaultTableModel table1 = new DefaultTableModel();
+   
+    Esta funcion estaba siendo creada para hacer una tabla dinamica con X número
+    de ROWS
+    private void setTable (){
+        String[] header = {"ID", "Operacion"};
+        table1.setColumnIdentifiers(header);
+        this.jTable1.setModel(table1);
+    }
+    */
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*En base a este fragmento es posible utilizar getter y setter para cada
-        elemento que se necesite cambiar su valor dentro de los otros documentos.
-        */
-        int  consumidores;
-        int productores;
-        double productoresms;
-        double consumidoresms; 
-        int buffersize;
-        int rangomaximo; //Se desconoce el formato en el que entraran
-        int rangominimo; //Se desconoce el formato en el que entrara
+        //Valores para creación de multitudes de elementos
+        int producers = (Integer)this.jSpinner1.getValue();
+        int consumers = (Integer)this.jSpinner2.getValue();
+        int producersms = Integer.parseInt(this.jTextField1.getText());
+        int consumersms = Integer.parseInt(this.jTextField2.getText());
+        int min = Integer.parseInt(this.jTextField4.getText());
+        int max = (Integer)this.jSpinner3.getValue();
         
-        consumidores = Integer.parseInt((String) jSpinner2.getValue());
-        productores = Integer.parseInt((String) jSpinner1.getValue());
-        productoresms = Double.parseDouble(jTextField1.getText());
-        consumidoresms = Double.parseDouble(jTextField2.getText());
-        buffersize = Integer.parseInt(jTextField3.getText());
+        
+        /*Filtro para datos */
+        /*FALTA CREAR CASOS ESPECIFICOS DONDE EL ESPACIO SEA VACIO*/
+        if (!ready){
+            if (producers != 0 && producers >= 0){
+                if (consumers != 0 && consumers >= 0){
+                    if (producersms >= 0 && producersms <= 10000){
+                        if (consumersms >= 0 && consumersms <= 10000){
+                            //FALTA VALIDAR N Y M DENTRO DEL PROCESO
+                            
+                                consumerList = new ArrayList<Consumer>(producers);
+                                producerList = new ArrayList<Producer>(consumers);
+
+                                Buffer buffer = new Buffer();
+                                buffer.setTables(jTable1, jTable2);
+                                buffer.setSize(Integer.parseInt(this.jTextField3.getText()));
+                                
+                                for (int i = 0; i < producers; i++){
+                                    Producer producer = new Producer(buffer, i+1);
+                                    producer.setms(producersms);
+                                    producer.setmin(min);
+                                    producer.setmax(max);
+                                    producer.start();
+                                    producerList.add(producer);
+                                }
+                                
+                                for (int i = 0; i < consumers; i++){
+                                    Consumer consumer = new Consumer(buffer, i+1);
+                                    consumer.setms(consumersms);
+                                    consumer.start();
+                                    consumerList.add(consumer);
+                                }
+                                this.jButton1.setText("Detener");
+                                ready = true;
+                        }else{
+                            System.out.print("Los valores en ms deben ser 0-10,000");
+                        }
+                    }else{
+                        System.out.print("Los valores en ms deben ser 0-10,000");
+                    }
+                }else{
+                    System.out.print("Los valores para Consumidor deben ser 1-10");
+                }
+            }else{
+                System.out.print("Los valores para Productor deben ser 1-10");
+            }
+
+        } 
+        else{
+            System.out.print(producerList.size());
+            System.out.print(consumerList.size());
+
+            /*SE ENCUENTRA UN ERROR AL INTERRUMPIR ELEMENTOS QUE SE ENCUENTREN 
+              DORMIDOS*/
+            for (int i = 0; i < producers; i++){
+                producerList.get(i).setStatus(false);
+                producerList.get(i).interrupt();
+            }
+            for (int i = 0; i < consumers; i++){
+                consumerList.get(i).setStatus(false);
+                consumerList.get(i).interrupt();
+            }
+            this.jButton1.setText("Iniciar");
+            ready = false;
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            this.jTextField1.setEditable(false);
+        }else{
+            this.jTextField1.setEditable(true);
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+                char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            this.jTextField2.setEditable(false);
+        }else{
+            this.jTextField2.setEditable(true);
+        }
+    }//GEN-LAST:event_jTextField2KeyPressed
+
+    private void jSpinner1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            this.jSpinner1.setValue(0);
+        }
+    }//GEN-LAST:event_jSpinner1KeyPressed
+
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+        // TODO add your handling code here:
+                        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            this.jTextField3.setEditable(false);
+        }else{
+            this.jTextField3.setEditable(true);
+        }
+    }//GEN-LAST:event_jTextField3KeyPressed
+
+    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+                        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            this.jTextField4.setEditable(false);
+        }else{
+            this.jTextField4.setEditable(true);
+        }
+    }//GEN-LAST:event_jTextField4KeyPressed
 
     /**
      * @param args the command line arguments
