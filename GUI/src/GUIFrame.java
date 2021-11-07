@@ -217,6 +217,8 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jProgressBar1.setValue(50);
 
+        jSpinner4.setEnabled(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -289,18 +291,8 @@ public class GUIFrame extends javax.swing.JFrame {
     private boolean ready = false;
     ArrayList<Consumer> consumerList;
     ArrayList<Producer> producerList;
-    /*
-    DefaultTableModel table1 = new DefaultTableModel();
-   
-    Esta funcion estaba siendo creada para hacer una tabla dinamica con X número
-    de ROWS
-    private void setTable (){
-        String[] header = {"ID", "Operacion"};
-        table1.setColumnIdentifiers(header);
-        this.jTable1.setModel(table1);
-    }
-    */
     
+
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Valores para creación de multitudes de elementos
@@ -311,7 +303,6 @@ public class GUIFrame extends javax.swing.JFrame {
         int min = Integer.parseInt(this.jTextField4.getText());
         int max = (Integer)this.jSpinner3.getValue();
         
-        
         /*Filtro para datos */
         /*FALTA CREAR CASOS ESPECIFICOS DONDE EL ESPACIO SEA VACIO*/
         if (!ready){
@@ -319,14 +310,17 @@ public class GUIFrame extends javax.swing.JFrame {
                 if (consumers != 0 && consumers >= 0){
                     if (producersms >= 0 && producersms <= 10000){
                         if (consumersms >= 0 && consumersms <= 10000){
-                            //FALTA VALIDAR N Y M DENTRO DEL PROCESO
-                            
+                            if(min >= 0 && max <= 9 && min < max && min != max){
+                                ready = true; 
                                 consumerList = new ArrayList<Consumer>(producers);
                                 producerList = new ArrayList<Producer>(consumers);
 
                                 Buffer buffer = new Buffer();
-                                buffer.setTables(jTable1, jTable2);
+                                buffer.setSpinner(jSpinner4);
+                                buffer.setProgress(jProgressBar1);
                                 buffer.setSize(Integer.parseInt(this.jTextField3.getText()));
+                                buffer.setTables(jTable1, jTable2);
+                                
                                 
                                 for (int i = 0; i < producers; i++){
                                     Producer producer = new Producer(buffer, i+1);
@@ -344,7 +338,12 @@ public class GUIFrame extends javax.swing.JFrame {
                                     consumerList.add(consumer);
                                 }
                                 this.jButton1.setText("Detener");
-                                ready = true;
+                                 
+                            }
+                            else{
+                              System.out.print("Rango de valores para las operaciones en scheme: [0, 9]");  
+                            }
+                                
                         }else{
                             System.out.print("Los valores en ms deben ser 0-10,000");
                         }

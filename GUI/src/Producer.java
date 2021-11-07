@@ -49,12 +49,13 @@ public class Producer extends Thread {
             int value1 = (int) (Math.random()*(max-min)) + min;
             int value2 = (int) (Math.random()*(max-min)) + min;
             /*Almacenamiento dentro del buffer en formato scheame ejemplo: (- 1 2)*/
-            this.buffer.produce(operador + " " +value2 +" "+ value1, this.identifier);
+            this.buffer.produce(this.identifier +" "+ operador + value2 + value1);
            
-            System.out.print("Producer " + identifier + " produced: " + operador + " " +value2 +" "+ value1);
+            //System.out.print("Producer " + identifier + " produced: " + operador + " " +value2 +" "+ value1);
             
             try {
-                Thread.sleep(ms);
+                System.out.println("Productor" + identifier + "Durmiendo");
+                 Thread.sleep(ms);   
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);             
             }
