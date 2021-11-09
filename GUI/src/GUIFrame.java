@@ -292,7 +292,6 @@ public class GUIFrame extends javax.swing.JFrame {
     ArrayList<Consumer> consumerList;
     ArrayList<Producer> producerList;
     
-
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Valores para creación de multitudes de elementos
@@ -302,14 +301,16 @@ public class GUIFrame extends javax.swing.JFrame {
         int consumersms = Integer.parseInt(this.jTextField2.getText());
         int min = Integer.parseInt(this.jTextField4.getText());
         int max = (Integer)this.jSpinner3.getValue();
+        int buffervalue = Integer.parseInt(this.jTextField3.getText());
         
         /*Filtro para datos */
         /*FALTA CREAR CASOS ESPECIFICOS DONDE EL ESPACIO SEA VACIO*/
         if (!ready){
-            if (producers != 0 && producers >= 0){
-                if (consumers != 0 && consumers >= 0){
+            if (producers != 0 && producers >= 0 && producers <= 11){
+                if (consumers != 0 && consumers >= 0 && producers <= 11){
                     if (producersms >= 0 && producersms <= 10000){
                         if (consumersms >= 0 && consumersms <= 10000){
+                            if (buffervalue >= 1 && buffervalue <= 100){
                             if(min >= 0 && max <= 9 && min < max && min != max){
                                 ready = true; 
                                 consumerList = new ArrayList<Consumer>(producers);
@@ -343,7 +344,10 @@ public class GUIFrame extends javax.swing.JFrame {
                             else{
                               System.out.print("Rango de valores para las operaciones en scheme: [0, 9]");  
                             }
-                                
+                            }
+                            else {
+                                System.out.print("Rango de valores para el Buffer deben ser 1-100");
+                            }
                         }else{
                             System.out.print("Los valores en ms deben ser 0-10,000");
                         }
@@ -356,7 +360,6 @@ public class GUIFrame extends javax.swing.JFrame {
             }else{
                 System.out.print("Los valores para Productor deben ser 1-10");
             }
-
         } 
         else{
             System.out.print(producerList.size());

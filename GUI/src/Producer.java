@@ -57,7 +57,7 @@ public class Producer extends Thread {
                 System.out.println("Productor" + identifier + "Durmiendo");
                  Thread.sleep(ms);   
             } catch (InterruptedException ex) {
-                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);             
+                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
