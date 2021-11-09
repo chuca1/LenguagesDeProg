@@ -42,10 +42,11 @@ public class Consumer extends Thread {
         while(status){
             product = this.buffer.consume(this.identifier);
             //System.out.println("Consumer consumed: " + product);
-            Buffer.print("Consumer consumed: " + product);
+            //Buffer.print("Consumer " + identifier + "consumed: " + product);
             
             try {
-                Thread.sleep(ms);
+                System.out.println("Consumidor" + identifier + " Durmiendo");
+                 Thread.sleep(ms);   
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }

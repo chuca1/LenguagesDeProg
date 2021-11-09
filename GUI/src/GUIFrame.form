@@ -317,6 +317,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="jSpinner4">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
