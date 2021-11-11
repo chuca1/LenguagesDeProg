@@ -63,7 +63,6 @@ public class Producer extends Thread {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);             
             }
         }
-        JOptionPane.showMessageDialog(null, "Calculos Termiandos","Tarea Lista",JOptionPane.INFORMATION_MESSAGE,null);
     }
     
 }
