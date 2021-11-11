@@ -402,6 +402,7 @@ public class GUIFrame extends javax.swing.JFrame {
                 //consumerList.get(i).interrupt();
             }
             this.jButton1.setText("Iniciar");
+            JOptionPane.showMessageDialog(null, "Calculos Termiandos ve tabla en Procesos","Tarea detenida",JOptionPane.INFORMATION_MESSAGE,null);
             ready = false;
         }
       }
