@@ -9,6 +9,7 @@ public class Consumer extends Thread {
     Buffer buffer;
     int identifier;
     boolean status = true;
+    private volatile boolean stopRequested = false; 
     private int ms = 0;
     
     
@@ -26,6 +27,10 @@ public class Consumer extends Thread {
     public void setms(int ms){
         this.ms = ms;
     }
+    
+    public void requestStop() {
+        stopRequested = true;
+    }
     /**
      * Setter para terminar o iniciar el proceso de consumidor
      * @param stat boolean que permite indicar el estado del consumidor
@@ -39,7 +44,7 @@ public class Consumer extends Thread {
         System.out.println("Running Consumer...");
         String product;
         
-        while(status){
+        while(!stopRequested){
             product = this.buffer.consume(this.identifier);
             //System.out.println("Consumer consumed: " + product);
             //Buffer.print("Consumer " + identifier + "consumed: " + product);

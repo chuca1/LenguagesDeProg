@@ -398,12 +398,12 @@ public class GUIFrame extends javax.swing.JFrame {
             /*SE ENCUENTRA UN ERROR AL INTERRUMPIR ELEMENTOS QUE SE ENCUENTREN 
               DORMIDOS*/
             for (int i = 0; i < producers; i++){
-                producerList.get(i).setStatus(false);
-                producerList.get(i).interrupt();
+                producerList.get(i).requestStop();
+                //producerList.get(i).interrupt();
             }
             for (int i = 0; i < consumers; i++){
-                consumerList.get(i).setStatus(false);
-                consumerList.get(i).interrupt();
+                consumerList.get(i).requestStop();
+                //consumerList.get(i).interrupt();
             }
             this.jButton1.setText("Iniciar");
             ready = false;
