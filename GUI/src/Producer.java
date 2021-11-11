@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 public class Producer extends Thread {
     Buffer buffer;
     int identifier;
+    private volatile boolean stopRequested = false;
     boolean status = true;
     //Variable que nos permite manejar el tiempo de espera
     private int ms = 0;
@@ -29,6 +30,10 @@ public class Producer extends Thread {
     public void setStatus(boolean stat){
         this.status = stat;
     }
+    
+    public void requestStop() {
+        stopRequested = true;
+    }
             
     @Override
     public void run() {
@@ -42,7 +47,7 @@ public class Producer extends Thread {
         /*Variable que alojara el tipo de operacion*/
         char operador;
         
-        while(status){
+        while(stopRequested){
             /*Random para elegir la operacion*/
             operador = products.charAt(r.nextInt(4));
             /*Creacion de los valores dentro del rango elegido*/
