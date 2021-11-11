@@ -1,5 +1,4 @@
 import java.awt.event.KeyEvent;
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -385,11 +384,11 @@ public class GUIFrame extends javax.swing.JFrame {
                 consumer.start();
                 consumerList.add(consumer);
             }
-            this.jButton1.setText("Detener");
+            this.jButton1.setText("DETENER");
+            this.jButton2.setEnabled(false);
+           
         } 
         else{
-            System.out.print(producerList.size());
-            System.out.print(consumerList.size());
 
             /*SE ENCUENTRA UN ERROR AL INTERRUMPIR ELEMENTOS QUE SE ENCUENTREN 
               DORMIDOS*/
@@ -401,8 +400,9 @@ public class GUIFrame extends javax.swing.JFrame {
                 consumerList.get(i).requestStop();
                 //consumerList.get(i).interrupt();
             }
-            this.jButton1.setText("Iniciar");
+            this.jButton1.setText("INICIAR");
             ready = false;
+            this.jButton2.setEnabled(true);
         }
       }
     }//GEN-LAST:event_jButton1ActionPerformed

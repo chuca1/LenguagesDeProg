@@ -10,8 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class Buffer {
     
 
-    //Nos permite detener el buffer que es el corazón del proceso
-    private boolean ready = false;
+
     //Nos permite crear un tamaño predeterminado para el buffer
     private int size = 0;
     //Nos permite crear un buffer de tamaño variable 
@@ -55,7 +54,7 @@ public class Buffer {
     /*FIN DE LOS SETTERS*/
     
     private void refreshProgress(){
-        double sizeDouble = size + 1.0; //Dividendo 
+        double sizeDouble = this.size * 1.0; //Dividendo 
         double taskToBeDone = this.buffer.size() * 1.0;
         this.progress.setValue((int) ((((sizeDouble - taskToBeDone)/sizeDouble))*100));
     }
@@ -85,10 +84,12 @@ public class Buffer {
                 }
                 
                 this.jTable1.setValueAt(id, i, 0);
-                this.jTable1.setValueAt(parts[1], i, 1); 
+                this.jTable1.setValueAt(parts2[0] + " " + parts2[1] + " " + parts2[2], i, 1); 
+                
             }
         }
     }
+    
      private void setTable1(){
         Object[] datos = new Object[jTable1.getColumnCount()];
         this.jTable1.setRowCount(0);
@@ -183,7 +184,6 @@ public class Buffer {
      */
     synchronized String consume(int id) {
         String product ;
-        
 
         if(this.buffer.isEmpty()) {
             try {
