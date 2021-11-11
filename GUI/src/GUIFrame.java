@@ -1,4 +1,5 @@
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.LinkedList;
@@ -418,17 +419,25 @@ public class GUIFrame extends javax.swing.JFrame {
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
-            this.jTextField1.setEditable(false);
+        if(!Character.isDigit(c)){
+            if(c != KeyEvent.VK_BACKSPACE) {
+                this.jTextField1.setEditable(false);
+            } else {
+                this.jTextField1.setEditable(true);
+            }
         }else{
             this.jTextField1.setEditable(true);
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
-                char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
-            this.jTextField2.setEditable(false);
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            if(c != KeyEvent.VK_BACKSPACE) {    
+                this.jTextField2.setEditable(false);
+            } else {
+                this.jTextField2.setEditable(true);
+            }
         }else{
             this.jTextField2.setEditable(true);
         }
@@ -438,23 +447,31 @@ public class GUIFrame extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if(Character.isLetter(c)){
             this.jSpinner1.setValue(0);
-        }
+        } 
     }//GEN-LAST:event_jSpinner1KeyPressed
-
+ 
     private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
         // TODO add your handling code here:
-                        char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
-            this.jTextField3.setEditable(false);
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            if(c != KeyEvent.VK_BACKSPACE) {    
+                this.jTextField3.setEditable(false);
+            } else {
+                this.jTextField3.setEditable(true);
+            }
         }else{
             this.jTextField3.setEditable(true);
         }
     }//GEN-LAST:event_jTextField3KeyPressed
 
     private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
-                        char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
-            this.jTextField4.setEditable(false);
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            if(c != KeyEvent.VK_BACKSPACE) {    
+                this.jTextField4.setEditable(false);
+            } else {
+                this.jTextField4.setEditable(true);
+            }
         }else{
             this.jTextField4.setEditable(true);
         }
