@@ -1,5 +1,5 @@
+import java.awt.event.KeyEvent;
 
-import com.sun.glass.events.KeyEvent;
 import java.util.ArrayList;
 import java.awt.Desktop;
 import java.io.File;
@@ -440,7 +440,7 @@ public class GUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!Character.isDigit(c)){
-            if(c != KeyEvent.VK_BACKSPACE) {
+            if(c != KeyEvent.VK_BACK_SPACE) {
                 this.jTextField1.setEditable(false);
             } else {
                 this.jTextField1.setEditable(true);
@@ -453,7 +453,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
         char c = evt.getKeyChar();
         if(!Character.isDigit(c)){
-            if(c != KeyEvent.VK_BACKSPACE) {    
+            if(c != KeyEvent.VK_BACK_SPACE) {    
                 this.jTextField2.setEditable(false);
             } else {
                 this.jTextField2.setEditable(true);
@@ -474,7 +474,7 @@ public class GUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!Character.isDigit(c)){
-            if(c != KeyEvent.VK_BACKSPACE) {    
+            if(c != KeyEvent.VK_BACK_SPACE) {    
                 this.jTextField3.setEditable(false);
             } else {
                 this.jTextField3.setEditable(true);
@@ -487,7 +487,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
         char c = evt.getKeyChar();
         if(!Character.isDigit(c)){
-            if(c != KeyEvent.VK_BACKSPACE) {    
+            if(c != KeyEvent.VK_BACK_SPACE) {    
                 this.jTextField4.setEditable(false);
             } else {
                 this.jTextField4.setEditable(true);
