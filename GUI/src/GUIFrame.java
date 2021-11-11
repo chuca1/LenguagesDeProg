@@ -310,6 +310,10 @@ public class GUIFrame extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Valores para creación de multitudes de elementos
+        if(this.jTextField1.getText().isEmpty() || this.jTextField2.getText().isEmpty() || this.jTextField3.getText().isEmpty() || this.jTextField4.getText().isEmpty()){
+            System.out.println("Todos los campos deben estar llenos!");
+        }
+        else{
         int producers = (Integer)this.jSpinner1.getValue();
         int consumers = (Integer)this.jSpinner2.getValue();
         int producersms = Integer.parseInt(this.jTextField1.getText());
@@ -393,7 +397,7 @@ public class GUIFrame extends javax.swing.JFrame {
             this.jButton1.setText("Iniciar");
             ready = false;
         }
-        
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
