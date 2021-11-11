@@ -74,7 +74,7 @@ public class Buffer {
                 }
                 
                 this.jTable1.setValueAt(id, i, 0);
-                this.jTable1.setValueAt(parts2[0] + " " + parts2[1] + " " + parts2[1], i, 1); 
+                this.jTable1.setValueAt(parts2[0] + " " + parts2[1] + " " + parts2[2], i, 1); 
             }
         }
         double taskDone = i * 1.0;
@@ -128,7 +128,7 @@ public class Buffer {
             for (int k = 0; k < parts[1].length(); k++){
                     parts2[k] = parts[1].charAt(k);
                 }
-            datos[1] = parts2[0] + " " + parts2[1] + " " + parts2[1];
+            datos[1] = parts2[0] + " " + parts2[1] + " " + parts2[2];
             datos[2] = resultado(parts[1]);   
             this.jTable2.insertRow(0, datos);
             this.jTable2Model.setModel(jTable2);
