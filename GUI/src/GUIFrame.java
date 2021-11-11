@@ -1,8 +1,10 @@
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -16,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
  * @author sdegante
  */
 public class GUIFrame extends javax.swing.JFrame {
-
     /**
      * Creates new form GUIFrame
      */
@@ -311,74 +312,84 @@ public class GUIFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Valores para creación de multitudes de elementos
         if(this.jTextField1.getText().isEmpty() || this.jTextField2.getText().isEmpty() || this.jTextField3.getText().isEmpty() || this.jTextField4.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos!","Error",JOptionPane.ERROR_MESSAGE,null);
             System.out.println("Todos los campos deben estar llenos!");
         }
         else{
         int producers = (Integer)this.jSpinner1.getValue();
+        if (producers > 10 || producers < 1) {
+            System.out.println("Los valores para Productor deben ser 1-10 ");
+            JOptionPane.showMessageDialog(null, "El valor de productores debe de ser entre 1 y 10","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         int consumers = (Integer)this.jSpinner2.getValue();
+        if (consumers > 10 || consumers < 1) {
+            System.out.println("Los valores para Consumidor deben ser 1-10 ");
+            JOptionPane.showMessageDialog(null, "El valor de consumidores debe de ser entre 1 y 10","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         int producersms = Integer.parseInt(this.jTextField1.getText());
+        if (producersms > 10000 || producersms < 0) {
+            System.out.println("Los valores en ms deben ser 0-10,000");
+            JOptionPane.showMessageDialog(null, "El tiempo de espera del productor debe de ser entre 0 y 10000","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         int consumersms = Integer.parseInt(this.jTextField2.getText());
+        if (consumersms > 10000 || consumersms < 0) {
+            System.out.println("Los valores en ms deben ser 0-10,000");
+            JOptionPane.showMessageDialog(null, "El tiempo de espera del consumidor debe de ser entre 0 y 10000","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         int min = Integer.parseInt(this.jTextField4.getText());
+        if (min > 9 || min < 0) {
+            JOptionPane.showMessageDialog(null, "El valor minimio del rango debe de ser entre 0 y 9","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         int max = (Integer)this.jSpinner3.getValue();
+        if (max > 9 || max < 0) {
+            System.out.println("Rango de valores para las operaciones en scheme: [0, 9]");  
+            JOptionPane.showMessageDialog(null, "El valor maximo del rango debe de ser entre 0 y 9","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
+        if (min >= max){
+            System.out.println("Min debe ser diferente y menor a Max");  
+            JOptionPane.showMessageDialog(null, "El valor minimo del rango debe de ser diferente y menor al maximo","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         int buffervalue = Integer.parseInt(this.jTextField3.getText());
+        if (buffervalue > 100 || buffervalue < 1) {
+            System.out.println("Rango de valores para el Buffer deben ser 1-100");
+            JOptionPane.showMessageDialog(null, "El valor del buffer debe de ser entre 1 y 100","Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
         /*Filtro para datos */
         /*FALTA CREAR CASOS ESPECIFICOS DONDE EL ESPACIO SEA VACIO*/
         if (!ready){
-            if (producers != 0 && producers >= 0 && producers <= 11){
-                if (consumers != 0 && consumers >= 0 && producers <= 11){
-                    if (producersms >= 0 && producersms <= 10000){
-                        if (consumersms >= 0 && consumersms <= 10000){
-                            if (buffervalue >= 1 && buffervalue <= 100){
-                            if(min >= 0 && max <= 9 && min < max && min != max){
-                                ready = true; 
-                                consumerList = new ArrayList<Consumer>(producers);
-                                producerList = new ArrayList<Producer>(consumers);
+            ready = true; 
+            consumerList = new ArrayList<Consumer>(producers);
+            producerList = new ArrayList<Producer>(consumers);
 
-                                Buffer buffer = new Buffer();
-                                buffer.setSpinner(jSpinner4);
-                                buffer.setProgress(jProgressBar1);
-                                buffer.setSize(Integer.parseInt(this.jTextField3.getText()));
-                                buffer.setTables(jTable1, jTable2);
+            Buffer buffer = new Buffer();
+            buffer.setSpinner(jSpinner4);
+            buffer.setProgress(jProgressBar1);
+            buffer.setSize(Integer.parseInt(this.jTextField3.getText()));
+            buffer.setTables(jTable1, jTable2);
                                 
-                                
-                                for (int i = 0; i < producers; i++){
-                                    Producer producer = new Producer(buffer, i+1);
-                                    producer.setms(producersms);
-                                    producer.setmin(min);
-                                    producer.setmax(max);
-                                    producer.start();
-                                    producerList.add(producer);
-                                }
-                                
-                                for (int i = 0; i < consumers; i++){
-                                    Consumer consumer = new Consumer(buffer, i+1);
-                                    consumer.setms(consumersms);
-                                    consumer.start();
-                                    consumerList.add(consumer);
-                                }
-                                this.jButton1.setText("Detener");
-                                 
-                            }
-                            else{
-                              System.out.println("Rango de valores para las operaciones en scheme: [0, 9]");  
-                            }
-                            }
-                            else {
-                                System.out.println("Rango de valores para el Buffer deben ser 1-100");
-                            }
-                        }else{
-                            System.out.println("Los valores en ms deben ser 0-10,000");
-                        }
-                    }else{
-                        System.out.println("Los valores en ms deben ser 0-10,000");
-                    }
-                }else{
-                    System.out.println("Los valores para Consumidor deben ser 1-10 ");
-                }
-            }else{
-
-                System.out.println("Los valores para Productor deben ser 1-10 ");
+            for (int i = 0; i < producers; i++){
+                Producer producer = new Producer(buffer, i+1);
+                producer.setms(producersms);
+                producer.setmin(min);
+                producer.setmax(max);
+                producer.start();
+                producerList.add(producer);
             }
+            for (int i = 0; i < consumers; i++){
+                Consumer consumer = new Consumer(buffer, i+1);
+                consumer.setms(consumersms);
+                consumer.start();
+                consumerList.add(consumer);
+            }
+            this.jButton1.setText("Detener");
         } 
         else{
             System.out.print(producerList.size());
@@ -387,12 +398,12 @@ public class GUIFrame extends javax.swing.JFrame {
             /*SE ENCUENTRA UN ERROR AL INTERRUMPIR ELEMENTOS QUE SE ENCUENTREN 
               DORMIDOS*/
             for (int i = 0; i < producers; i++){
-                producerList.get(i).setStatus(false);
-                producerList.get(i).interrupt();
+                producerList.get(i).requestStop();
+                //producerList.get(i).interrupt();
             }
             for (int i = 0; i < consumers; i++){
-                consumerList.get(i).setStatus(false);
-                consumerList.get(i).interrupt();
+                consumerList.get(i).requestStop();
+                //consumerList.get(i).interrupt();
             }
             this.jButton1.setText("Iniciar");
             ready = false;
