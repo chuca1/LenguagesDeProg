@@ -1,8 +1,10 @@
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -16,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  * @author sdegante
  */
 public class GUIFrame extends javax.swing.JFrame {
+
+    private Component frame;
 
     /**
      * Creates new form GUIFrame
@@ -315,12 +319,40 @@ public class GUIFrame extends javax.swing.JFrame {
         }
         else{
         int producers = (Integer)this.jSpinner1.getValue();
+        if (producers > 10 || producers < 1) {
+            JOptionPane.showMessageDialog(frame, "El valor de productores debe de ser entre 1 y 10");
+            return;
+        }
         int consumers = (Integer)this.jSpinner2.getValue();
+        if (consumers > 10 || consumers < 1) {
+            JOptionPane.showMessageDialog(frame, "El valor de consumidores debe de ser entre 1 y 10");
+            return;
+        }
         int producersms = Integer.parseInt(this.jTextField1.getText());
+        if (producersms > 10000 || producersms < 0) {
+            JOptionPane.showMessageDialog(frame, "El tiempo de espera del productor debe de ser entre 0 y 10000");
+            return;
+        }
         int consumersms = Integer.parseInt(this.jTextField2.getText());
+        if (consumersms > 10000 || consumersms < 0) {
+            JOptionPane.showMessageDialog(frame, "El tiempo de espera del consumidor debe de ser entre 0 y 10000");
+            return;
+        }
         int min = Integer.parseInt(this.jTextField4.getText());
+        if (min > 9 || min < 0) {
+            JOptionPane.showMessageDialog(frame, "El valor minimio del rango debe de ser entre 0 y 9");
+            return;
+        }
         int max = (Integer)this.jSpinner3.getValue();
+        if (max > 9 || max < 0) {
+            JOptionPane.showMessageDialog(frame, "El valor maximo del rango debe de ser entre 0 y 9");
+            return;
+        }
         int buffervalue = Integer.parseInt(this.jTextField3.getText());
+        if (buffervalue > 100 || buffervalue < 1) {
+            JOptionPane.showMessageDialog(frame, "El valor del buffer debe de ser entre 1 y 100");
+            return;
+        }
         /*Filtro para datos */
         /*FALTA CREAR CASOS ESPECIFICOS DONDE EL ESPACIO SEA VACIO*/
         if (!ready){
