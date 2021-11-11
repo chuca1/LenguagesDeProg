@@ -47,7 +47,7 @@ public class Producer extends Thread {
         /*Variable que alojara el tipo de operacion*/
         char operador;
         
-        while(stopRequested){
+        while(!stopRequested){
             /*Random para elegir la operacion*/
             operador = products.charAt(r.nextInt(4));
             /*Creacion de los valores dentro del rango elegido*/
