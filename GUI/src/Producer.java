@@ -6,12 +6,12 @@ public class Producer extends Thread {
     Buffer buffer;
     int identifier;
     private volatile boolean stopRequested = false;
-    boolean status = true;
     //Variable que nos permite manejar el tiempo de espera
     private int ms = 0;
     //Variables para crear un rango de datos
     private int min = 0;
     private int max = 1;
+    
     Producer(Buffer buffer, int id) {
         this.buffer = buffer;
         this.identifier = id;
@@ -26,9 +26,6 @@ public class Producer extends Thread {
     }
     public void setmax(int maximo){
         this.max = maximo;
-    }
-    public void setStatus(boolean stat){
-        this.status = stat;
     }
     
     public void requestStop() {
@@ -54,15 +51,15 @@ public class Producer extends Thread {
             int value1 = (int) (Math.random()*(max-min)) + min;
             int value2 = (int) (Math.random()*(max-min)) + min;
             /*Almacenamiento dentro del buffer en formato scheame ejemplo: (- 1 2)*/
-            this.buffer.produce(this.identifier + " " + operador + value2 + value1);
+            this.buffer.produce(this.identifier +" "+ operador + value2 + value1);
            
             //System.out.print("Producer " + identifier + " produced: " + operador + " " +value2 +" "+ value1);
             
             try {
-                System.out.println("Productor #" + identifier + " Durmiendo");
+                System.out.println("Productor" + identifier + "Durmiendo");
                  Thread.sleep(ms);   
             } catch (InterruptedException ex) {
-                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);             
             }
         }
     }

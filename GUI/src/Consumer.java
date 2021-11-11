@@ -8,7 +8,6 @@ public class Consumer extends Thread {
     /*Variables necesarias*/
     Buffer buffer;
     int identifier;
-    boolean status = true;
     private volatile boolean stopRequested = false; 
     private int ms = 0;
     
@@ -31,13 +30,7 @@ public class Consumer extends Thread {
     public void requestStop() {
         stopRequested = true;
     }
-    /**
-     * Setter para terminar o iniciar el proceso de consumidor
-     * @param stat boolean que permite indicar el estado del consumidor
-     */
-    public void setStatus(boolean stat){
-        this.status = stat;
-    }
+
 
     @Override
     public void run() {
@@ -50,7 +43,7 @@ public class Consumer extends Thread {
             //Buffer.print("Consumer " + identifier + "consumed: " + product);
             
             try {
-                System.out.println("Consumidor #" + identifier + " Durmiendo");
+                System.out.println("Consumidor" + identifier + " Durmiendo");
                  Thread.sleep(ms);   
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);

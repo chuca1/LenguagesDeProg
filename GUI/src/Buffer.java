@@ -54,13 +54,18 @@ public class Buffer {
     
     /*FIN DE LOS SETTERS*/
     
-    
+        public static void clearTable(final DefaultTableModel table) {
+    for (int i = 0; i < table.getRowCount(); i++)
+       for(int j = 0; j < table.getColumnCount(); j++) {
+           table.setValueAt("", i, j);
+       }
+    }
     /*CODIFICACION PARA MODIFICAR TABLAS Y PROGRESS BAR*/
         /*ELEMENTOS PARA TABLA 1 Y PROGRESS BAR*/
     
     synchronized private void refreshTable1(){
          /*FALTA HACER QUE LA TABLA SEA DINAMICA Y TOME EL TAMAÑO DE BUFFER*/
-        this.setTable1();
+        this.clearTable(jTable1);
         int i;
         for (i = 0; i <this.buffer.size(); i++){
             if (i < size){
@@ -74,12 +79,12 @@ public class Buffer {
                 }
                 
                 this.jTable1.setValueAt(id, i, 0);
-                this.jTable1.setValueAt(parts2[0] + " " + parts2[1] + " " + parts2[2], i, 1); 
+                this.jTable1.setValueAt(parts[1], i, 1); 
             }
         }
         double taskDone = i * 1.0;
         double sizeDouble = size + 1.0;
-        this.progress.setValue((int) (((sizeDouble- taskDone)/taskDone)*100));
+        //this.progress.setValue((int) (((sizeDouble- taskDone)/taskDone)*100));
         notifyAll();
     }
      private void setTable1(){
@@ -124,11 +129,7 @@ public class Buffer {
             razón*/
         if (data != null){
             parts = data.split(" ");
-            char[] parts2 = new char[parts[1].length()];
-            for (int k = 0; k < parts[1].length(); k++){
-                    parts2[k] = parts[1].charAt(k);
-                }
-            datos[1] = parts2[0] + " " + parts2[1] + " " + parts2[2];
+            datos[1] = parts[1];
             datos[2] = resultado(parts[1]);   
             this.jTable2.insertRow(0, datos);
             this.jTable2Model.setModel(jTable2);
