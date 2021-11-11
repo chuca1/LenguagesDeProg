@@ -45,7 +45,7 @@ public class Consumer extends Thread {
             //Buffer.print("Consumer " + identifier + "consumed: " + product);
             
             try {
-                System.out.println("Consumidor" + identifier + " Durmiendo");
+                System.out.println("Consumidor #" + identifier + " Durmiendo");
                  Thread.sleep(ms);   
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);

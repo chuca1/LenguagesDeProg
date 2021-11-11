@@ -68,9 +68,13 @@ public class Buffer {
                 char id = buffer.get(i).charAt(0);
                 String datos = buffer.get(i);
                 String[] parts = datos.split(" ");
+                char[] parts2 = new char[parts[1].length()];
+                for (int k = 0; k < parts[1].length(); k++){
+                    parts2[k] = parts[1].charAt(k);
+                }
                 
                 this.jTable1.setValueAt(id, i, 0);
-                this.jTable1.setValueAt(parts[1], i, 1); 
+                this.jTable1.setValueAt(parts2[0] + " " + parts2[1] + " " + parts2[1], i, 1); 
             }
         }
         double taskDone = i * 1.0;
@@ -120,7 +124,11 @@ public class Buffer {
             razón*/
         if (data != null){
             parts = data.split(" ");
-            datos[1] = parts[1];
+            char[] parts2 = new char[parts[1].length()];
+            for (int k = 0; k < parts[1].length(); k++){
+                    parts2[k] = parts[1].charAt(k);
+                }
+            datos[1] = parts2[0] + " " + parts2[1] + " " + parts2[1];
             datos[2] = resultado(parts[1]);   
             this.jTable2.insertRow(0, datos);
             this.jTable2Model.setModel(jTable2);
