@@ -1,12 +1,7 @@
 
 import com.sun.glass.events.KeyEvent;
-import java.awt.Color;
-import java.awt.Component;
-import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
