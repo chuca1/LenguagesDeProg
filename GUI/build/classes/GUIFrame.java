@@ -60,7 +60,6 @@ public class GUIFrame extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jSpinner4 = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -266,13 +265,6 @@ public class GUIFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("CLEAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,14 +272,9 @@ public class GUIFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,9 +282,7 @@ public class GUIFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -356,24 +341,24 @@ public class GUIFrame extends javax.swing.JFrame {
                                  
                             }
                             else{
-                              System.out.println("Rango de valores para las operaciones en scheme: [0, 9]");  
+                              System.out.print("Rango de valores para las operaciones en scheme: [0, 9]");  
                             }
                             }
                             else {
-                                System.out.println("Rango de valores para el Buffer deben ser 1-100");
+                                System.out.print("Rango de valores para el Buffer deben ser 1-100");
                             }
                         }else{
-                            System.out.println("Los valores en ms deben ser 0-10,000");
+                            System.out.print("Los valores en ms deben ser 0-10,000");
                         }
                     }else{
-                        System.out.println("Los valores en ms deben ser 0-10,000");
+                        System.out.print("Los valores en ms deben ser 0-10,000");
                     }
                 }else{
-                    System.out.println("Los valores para Consumidor deben ser 1-10 ");
+                    System.out.print("Los valores para Consumidor deben ser 1-10");
                 }
             }else{
 
-                System.out.println("Los valores para Productor deben ser 1-10 ");
+                System.out.print("Los valores para Productor deben ser 1-10");
             }
         } 
         else{
@@ -445,22 +430,6 @@ public class GUIFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField4KeyPressed
 
-    private void clearFields() {
-        this.jTextField1.setText(null);
-        this.jTextField2.setText(null);
-        this.jTextField3.setText(null);
-        this.jTextField4.setText(null);
-        this.jSpinner1.setValue(0);
-        this.jSpinner2.setValue(0);
-        this.jSpinner3.setValue(0);
-        this.jSpinner4.setValue(0);
-    }
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        clearFields();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -498,7 +467,6 @@ public class GUIFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
