@@ -132,7 +132,11 @@ public class Buffer {
             razón*/
         if (data != null){
             parts = data.split(" ");
-            datos[1] = parts[1];
+            char[] parts2 = new char[parts[1].length()];
+                for (int k = 0; k < parts[1].length(); k++){
+                    parts2[k] = parts[1].charAt(k);
+            }
+            datos[1] = parts2[0] + " " + parts2[1] + " " + parts[2];
             datos[2] = resultado(parts[1]);   
             this.jTable2.insertRow(0, datos);
             this.jTable2Model.setModel(jTable2);
