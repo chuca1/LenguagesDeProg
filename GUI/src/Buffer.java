@@ -54,16 +54,22 @@ public class Buffer {
     
     /*FIN DE LOS SETTERS*/
     
-        public static void clearTable(final DefaultTableModel table) {
-    for (int i = 0; i < table.getRowCount(); i++)
-       for(int j = 0; j < table.getColumnCount(); j++) {
-           table.setValueAt("", i, j);
-       }
+    private void refreshProgress(){
+        double sizeDouble = size + 1.0; //Dividendo 
+        double taskToBeDone = this.buffer.size() * 1.0;
+        this.progress.setValue((int) ((((sizeDouble - taskToBeDone)/sizeDouble))*100));
+    }
+    
+    private static void clearTable(final DefaultTableModel table) {
+        for (int i = 0; i < table.getRowCount(); i++)
+            for(int j = 0; j < table.getColumnCount(); j++) {
+            table.setValueAt("", i, j);
+            }
     }
     /*CODIFICACION PARA MODIFICAR TABLAS Y PROGRESS BAR*/
         /*ELEMENTOS PARA TABLA 1 Y PROGRESS BAR*/
     
-    synchronized private void refreshTable1(){
+    private void refreshTable1(){
          /*FALTA HACER QUE LA TABLA SEA DINAMICA Y TOME EL TAMAÑO DE BUFFER*/
         this.clearTable(jTable1);
         int i;
@@ -82,10 +88,6 @@ public class Buffer {
                 this.jTable1.setValueAt(parts[1], i, 1); 
             }
         }
-        double taskDone = i * 1.0;
-        double sizeDouble = size + 1.0;
-        //this.progress.setValue((int) (((sizeDouble- taskDone)/taskDone)*100));
-        notifyAll();
     }
      private void setTable1(){
         Object[] datos = new Object[jTable1.getColumnCount()];
@@ -193,9 +195,10 @@ public class Buffer {
         //Obtiene y regresa la cabeza del Queue
         product = this.buffer.poll();
 
-        
+        refreshProgress();
         setTable2(id, product);
         refreshTable1();
+        refreshProgress();
         notifyAll();
 
         return product;
@@ -221,8 +224,10 @@ public class Buffer {
         }
         
         if(product != null){
+            refreshProgress();
             this.buffer.add(product);
             refreshTable1();
+            refreshProgress();
             notifyAll();  
         }
         
